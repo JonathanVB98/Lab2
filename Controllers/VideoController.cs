@@ -57,5 +57,13 @@ namespace MvcPlantilla.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Eliminar(int idvideo)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@idvideo", idvideo));
+            BaseHelper.ejecutarSentencia("Sp_Eliminar", CommandType.StoredProcedure, parametros);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
