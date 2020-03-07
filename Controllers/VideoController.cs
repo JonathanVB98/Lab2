@@ -41,6 +41,17 @@ namespace MvcPlantilla.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Modificar(int idvideo, string titulo, int reproducciones, string link)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@idvideo", idvideo));
+            parametros.Add(new SqlParameter("@titulo", titulo));
+            parametros.Add(new SqlParameter("@reproducciones", reproducciones));
+            parametros.Add(new SqlParameter("@link", link));
+            BaseHelper.ejecutarSentencia("Sp_Modificar", CommandType.StoredProcedure, parametros);
+            return RedirectToAction("Index", "Home");
+        }
 
         public ActionResult Eliminar()
         {
